@@ -33,6 +33,7 @@ public class BookResponse {
     public static class VolumeInfo {
         private String title;
         private List<String> authors;
+        private ImageLinks imageLinks;
 
         public String getTitle() {
             return title;
@@ -49,5 +50,15 @@ public class BookResponse {
         public void setAuthors(List<String> authors) {
             this.authors = authors;
         }
+
+        public ImageLinks getImageLinks() { return imageLinks; }
+    }
+
+    public static class ImageLinks {
+        private String smallThumbnail;
+        private String thumbnail;
+
+        public String getSmallThumbnail() { return smallThumbnail; }
+        public String getThumbnail() { return thumbnail; }
     }
 }
