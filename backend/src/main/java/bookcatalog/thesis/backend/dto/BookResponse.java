@@ -1,5 +1,5 @@
 package bookcatalog.thesis.backend.dto;
-
+//BookResponse.java
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
@@ -18,6 +18,17 @@ public class BookResponse {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Item {
+
+        String id;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
         private VolumeInfo volumeInfo;
 
         public VolumeInfo getVolumeInfo() {

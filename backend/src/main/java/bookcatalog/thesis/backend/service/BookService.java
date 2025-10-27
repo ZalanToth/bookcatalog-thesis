@@ -1,9 +1,10 @@
+//Bookservice.java
 package bookcatalog.thesis.backend.service;
-
 import bookcatalog.thesis.backend.dto.BookResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import bookcatalog.thesis.backend.dto.BookDetailResponse;
 
 @Service
 public class BookService {
@@ -20,7 +21,12 @@ public class BookService {
     }
 
     public BookResponse searchBooks(String query) {
-        String url = String.format("%s?q=%s&maxResults=5&key=%s", baseUrl, query, apiKey);
+        String url = String.format("%s?q=%s&maxResults=10&key=%s", baseUrl, query,apiKey);
         return restTemplate.getForObject(url, BookResponse.class);
+    }
+
+    public BookDetailResponse getBookById(String id) {
+        String url = String.format("%s/%s?key=%s", baseUrl, id,apiKey);
+        return restTemplate.getForObject(url, BookDetailResponse.class);
     }
 }
