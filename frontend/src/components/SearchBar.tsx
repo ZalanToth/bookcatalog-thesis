@@ -2,14 +2,17 @@ import React from "react";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
+  initialValue?: string;
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
-  const [query, setQuery] = React.useState("");
+export default function SearchBar({ onSearch, initialValue = "" }: SearchBarProps) {
+  const [query, setQuery] = React.useState(initialValue);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(query);
+    if (query.trim()) {
+      onSearch(query.trim());
+    }
   };
 
   return (

@@ -7,6 +7,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Home />} />
         <Route path="/:id" element={<BookDetails />} />
       </Routes>
     </Router>
