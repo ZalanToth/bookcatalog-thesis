@@ -1,10 +1,13 @@
 import { useState,useEffect } from "react";
 import BookList from "../components/BookList";
 import Navbar from "../components/Navbar";
+import { useSearchParams } from "react-router-dom";
 export default function Home() {
   const [books, setBooks] = useState<any[]>([]);
   const [userName, setUserName] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const query = searchParams.get("q") || "";
   useEffect(() => {
     fetch("http://localhost:8081/user", { credentials: "include" })
       .then(res => res.json())
@@ -16,8 +19,19 @@ export default function Home() {
   const handleSearch = async (query: string) => {
     const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
     const data = await res.json();
+    setSearchParams({ q: query });
     setBooks(data.items || []);
   };
+
+    useEffect(() => {
+    if (query) {
+      (async () => {
+        const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
+        const data = await res.json();
+        setBooks(data.items || []);
+      })();
+    }
+  }, [query]);
 
   return (
     <div className="min-h-screen bg-gray-900 p-6 text-white">
