@@ -3,7 +3,6 @@ import bookcatalog.thesis.backend.model.BookListEntity;
 import bookcatalog.thesis.backend.model.ListType;
 
 import java.util.List;
-import java.util.Map;
 
 public class BookListDto {
 

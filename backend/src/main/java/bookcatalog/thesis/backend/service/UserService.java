@@ -9,16 +9,12 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    private UserEntity currentUser;
-
-
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;

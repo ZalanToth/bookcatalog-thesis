@@ -1,4 +1,3 @@
-//Bookservice.java
 package bookcatalog.thesis.backend.service;
 import bookcatalog.thesis.backend.dto.BookResponse;
 import org.springframework.stereotype.Service;

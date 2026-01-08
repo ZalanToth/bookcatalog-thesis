@@ -1,5 +1,4 @@
 package bookcatalog.thesis.backend.dto;
-//BookResponse.java
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;

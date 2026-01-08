@@ -1,17 +1,11 @@
 package bookcatalog.thesis.backend.service;
 
-import bookcatalog.thesis.backend.dto.AddBookRequest;
-import bookcatalog.thesis.backend.dto.BookListDto;
-import bookcatalog.thesis.backend.dto.UserListsResponseDto;
 import bookcatalog.thesis.backend.model.*;
 import bookcatalog.thesis.backend.repository.BookListRepository;
 import bookcatalog.thesis.backend.dto.BookDto;
 import bookcatalog.thesis.backend.repository.BookRepository;
-import bookcatalog.thesis.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Transactional

@@ -22,7 +22,6 @@ public class BookEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private BookListEntity bookList;
 
-    // getters / setters
 
     public Long getId() {
         return id;
