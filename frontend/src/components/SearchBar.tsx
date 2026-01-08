@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -6,7 +6,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onSearch, initialValue = "" }: SearchBarProps) {
-  const [query, setQuery] = React.useState(initialValue);
+  const [query, setQuery] = useState(initialValue);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,20 +16,20 @@ export default function SearchBar({ onSearch, initialValue = "" }: SearchBarProp
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
+    <form onSubmit={handleSubmit} className="flex mb-6">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="border rounded-lg p-2 flex-grow"
-        placeholder="Search books..."
+        placeholder="Search for books..."
+        className="flex-grow p-2 rounded-l bg-gray-700 text-white"
       />
       <button
         type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        className="px-4 bg-blue-600 rounded-r hover:bg-blue-700"
       >
         Search
       </button>
-    </form>
-  );
+    </form>  
+    );
 }

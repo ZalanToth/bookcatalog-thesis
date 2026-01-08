@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AddToList from "../components/AddToList";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -38,6 +39,11 @@ export default function BookDetails() {
           )}
           <p className="text-gray-400 mb-4">{info.publishedDate}</p>
           <p className="text-gray-200 leading-relaxed">{info.description}</p>
+          <AddToList
+            googleId={book.id}
+            title={book.volumeInfo.title}
+            authors={book.volumeInfo.authors ?? []}
+          />
         </div>
       </div>
     </div>

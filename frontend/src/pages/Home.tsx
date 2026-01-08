@@ -1,14 +1,12 @@
 import { useState,useEffect } from "react";
-import SearchBar from "../components/SearchBar";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import BookList from "../components/BookList";
-import { LoginButton } from "../components/LoginButton";
-import { useSearchParams } from "react-router-dom";
-
-
+import Navbar from "../components/Navbar";
 export default function Home() {
   const [books, setBooks] = useState<any[]>([]);
   const [userName, setUserName] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const query = searchParams.get("q") || "";
 
@@ -21,12 +19,10 @@ export default function Home() {
   }, []);
 
   const handleSearch = async (query: string) => {
-    setSearchParams({ q: query });
     const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
     const data = await res.json();
     setBooks(data.items || []);
   };
-
   useEffect(() => {
     if (query) {
       (async () => {
@@ -39,16 +35,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-900 p-6 text-white">
-    <div className="flex justify-end mb-4">
-      <LoginButton />
-    </div>
+
     {userName ? (
         <h1 className="text-2xl font-bold mb-4">Welcome, {userName}!</h1>
       ) : (
         <h1 className="text-2xl font-bold mb-4">Please log in</h1>
       )}
 
-    <SearchBar onSearch={handleSearch} />
+    <Navbar onSearch={handleSearch}  />
     <BookList books={books} />
   </div>
   );

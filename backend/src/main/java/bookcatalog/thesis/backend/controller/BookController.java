@@ -1,5 +1,4 @@
 package bookcatalog.thesis.backend.controller;
-//BookController.java
 import bookcatalog.thesis.backend.dto.BookDetailResponse;
 import bookcatalog.thesis.backend.dto.BookResponse;
 import bookcatalog.thesis.backend.service.BookService;
