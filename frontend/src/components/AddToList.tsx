@@ -1,0 +1,44 @@
+import { addBookToList} from "../bookListApi";
+import type { ListType} from "../bookListApi";
+type Props = {
+  googleId: string;
+  title: string;
+  authors: string[];
+};
+
+const AddToList = ({ googleId, title, authors }: Props) => {
+  const handleAdd = async (listType: ListType) => {
+    try {
+      await addBookToList(listType, {
+        googleId,
+        title,
+        authors,
+      });
+      alert("Book added ✅");
+      console.log(listType,googleId,title,authors)
+    } catch (err) {
+      console.log(listType,googleId,title,authors)
+      alert("There was an error ❌");
+    }
+  };
+
+  return (
+    <div style={{ marginTop: "1rem" }}>
+      <p>Hozzáadás listához:</p>
+
+      <button onClick={() => handleAdd("TO_READ")}>
+        📚 To read
+      </button>
+
+      <button onClick={() => handleAdd("READING_NOW")}>
+        📖 Reading now
+      </button>
+
+      <button onClick={() => handleAdd("READ")}>
+        ✅ Read
+      </button>
+    </div>
+  );
+};
+
+export default AddToList;
