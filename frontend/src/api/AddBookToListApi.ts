@@ -1,17 +1,12 @@
 export type ListType = "TO_READ" | "READING_NOW" | "READ";
+import type { BookDto } from "../types";
 
-export interface AddBookRequest {
-  googleId: string;
-  title: string;
-  authors: string[];
-}
 
 export async function addBookToList(
   type: ListType,
-  book: AddBookRequest
+  book: BookDto
 ) {
   const response = await fetch(
-    //itt hiba post 400-as kód ezt folytasd te majom
     `http://localhost:8081/api/lists/${type}/books`,
     {
       method: "POST",

@@ -1,5 +1,5 @@
-import { addBookToList} from "../bookListApi";
-import type { ListType} from "../bookListApi";
+import { addBookToList} from "../api/AddBookToListApi";
+import type { ListType} from "../api/AddBookToListApi";
 type Props = {
   googleId: string;
   title: string;
