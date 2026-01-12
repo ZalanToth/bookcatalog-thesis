@@ -8,12 +8,14 @@ public class BookDto{
         String googleId;
         String title;
         List<String> authors;
+        int pageCount;
 
     public static BookDto fromEntity(BookEntity entity) {
         BookDto dto = new BookDto();
         dto.googleId = entity.getGoogleId();
         dto.title = entity.getTitle();
         dto.authors = entity.getAuthors();
+        dto.pageCount = entity.getPageCount();
         return dto;
     }
 
@@ -27,5 +29,8 @@ public class BookDto{
 
     public List<String> getAuthors() {
         return authors;
+    }
+    public int getPageCount() {
+        return pageCount;
     }
 }

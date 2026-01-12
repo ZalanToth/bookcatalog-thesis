@@ -4,18 +4,20 @@ type Props = {
   googleId: string;
   title: string;
   authors: string[];
+  pageCount: number;
 };
 
-const AddToList = ({ googleId, title, authors }: Props) => {
+const AddToList = ({ googleId, title, authors,pageCount }: Props) => {
   const handleAdd = async (listType: ListType) => {
     try {
       await addBookToList(listType, {
         googleId,
         title,
         authors,
+        pageCount,
       });
       alert("Book added ✅");
-      console.log(listType,googleId,title,authors)
+      console.log(listType,googleId,title,authors,pageCount)
     } catch (err) {
       console.log(listType,googleId,title,authors)
       alert("There was an error ❌");

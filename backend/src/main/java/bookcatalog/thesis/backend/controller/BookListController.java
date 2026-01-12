@@ -45,6 +45,7 @@ public class BookListController {
         System.out.println("LIST TYPE: " + type);
         System.out.println("REQUEST: " + bookDto.getTitle());
         System.out.println("AUTHORS: " + bookDto.getAuthors());
+        System.out.println("PAGE COUNT: " + bookDto.getPageCount());
     }
 }
 

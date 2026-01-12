@@ -40,6 +40,7 @@ public class BookListService {
                     newBook.setGoogleId(request.getGoogleId());
                     newBook.setTitle(request.getTitle());
                     newBook.setAuthors(request.getAuthors());
+                    newBook.setPageCount(request.getPageCount());
                     return bookRepository.save(newBook);
                 });
 

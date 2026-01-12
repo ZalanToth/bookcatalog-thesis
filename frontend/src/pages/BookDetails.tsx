@@ -27,7 +27,7 @@ export default function BookDetails() {
           <img
             src={info.imageLinks.thumbnail}
             alt={info.title}
-            className="w-48 h-auto rounded-lg shadow-lg"
+            className="w-48 h-64 rounded-lg shadow-lg"
           />
         )}
         <div>
@@ -37,12 +37,14 @@ export default function BookDetails() {
               By {info.authors.join(", ")}
             </p>
           )}
+          <p>number of pages:{info.pageCount}</p>
           <p className="text-gray-400 mb-4">{info.publishedDate}</p>
           <p className="text-gray-200 leading-relaxed">{info.description}</p>
           <AddToList
             googleId={book.id}
             title={book.volumeInfo.title}
             authors={book.volumeInfo.authors ?? []}
+            pageCount ={book.volumeInfo.pageCount}
           />
         </div>
       </div>

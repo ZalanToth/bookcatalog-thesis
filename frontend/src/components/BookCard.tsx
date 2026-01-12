@@ -1,13 +1,13 @@
-// src/components/BookCard.tsx
 import { useNavigate } from "react-router-dom";
 interface BookCardProps {
   id: string;
   title: string;
   authors?: string[];
   thumbnail?: string;
+  pageCount:  number;
 }
 
-export default function BookCard({ id, title, authors, thumbnail }: BookCardProps) {
+export default function BookCard({ id, title, authors, thumbnail,pageCount }: BookCardProps) {
   const navigate = useNavigate();
   
   const handleClick = () => {
@@ -31,6 +31,7 @@ export default function BookCard({ id, title, authors, thumbnail }: BookCardProp
         <p>{id}</p>
         <h2 className="text-xl font-semibold">{title}</h2>
         <p className="text-gray-300">{authors?.join(", ")}</p>
+        <p className="text-gray-300">{pageCount}</p>
       </div>
     </div>
   );

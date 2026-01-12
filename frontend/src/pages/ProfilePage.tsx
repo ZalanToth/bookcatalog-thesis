@@ -53,6 +53,7 @@ const ProfilePage = () => {
                   {book.authors?.length > 0 && (
                     <span> — {book.authors}</span>
                   )}
+                  <p>number of pages: {book.pageCount}</p>
                 </li>
               ))}
             </ul>

@@ -2,15 +2,12 @@ export interface BookDto {
   googleId: string;
   title: string;
   authors: string[];
+  pageCount: number;
 }
 
 export interface BookListDto {
   type: ListType;
   books: BookDto[];
-}
-
-export interface BookListsResponse {
-  lists: BookListDto[];
 }
 
 export type ListType = "TO_READ" | "READING_NOW" | "READ";

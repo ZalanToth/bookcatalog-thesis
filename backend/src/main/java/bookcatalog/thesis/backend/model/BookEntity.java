@@ -14,6 +14,7 @@ public class BookEntity {
     private String googleId;
 
     private String title;
+    private int pageCount;
 
     @ElementCollection
     @CollectionTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"))
@@ -54,4 +55,10 @@ public class BookEntity {
         return bookList;
     }
     public void setBookList(BookListEntity bookList) {}
+    public int getPageCount() {
+        return pageCount;
+    }
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
 }

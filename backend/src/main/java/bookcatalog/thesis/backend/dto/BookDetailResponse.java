@@ -20,6 +20,7 @@ public class BookDetailResponse {
         private String description;
         private String publishedDate;
         private ImageLinks imageLinks;
+        private int pageCount;
 
         public String getTitle() { return title; }
         public void setTitle(String title) { this.title = title; }
@@ -35,6 +36,9 @@ public class BookDetailResponse {
 
         public ImageLinks getImageLinks() { return imageLinks; }
         public void setImageLinks(ImageLinks imageLinks) { this.imageLinks = imageLinks; }
+
+        public int getPageCount() { return pageCount; }
+        public void setPageCount(int pageCount) { this.pageCount = pageCount; }
     }
 
     public static class ImageLinks {
