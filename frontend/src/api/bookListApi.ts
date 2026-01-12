@@ -11,3 +11,13 @@ export const fetchMyLists = async (): Promise<BookList[]> => {
 
   return res.json();
 };
+
+export const deleteBookFromList = async (
+  listType: string,
+  googleId: string
+) => {
+  await fetch(`http://localhost:8081/api/lists/${listType}/books/${googleId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+};

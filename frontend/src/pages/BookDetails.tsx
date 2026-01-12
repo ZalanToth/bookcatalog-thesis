@@ -37,8 +37,8 @@ export default function BookDetails() {
               By {info.authors.join(", ")}
             </p>
           )}
-          <p>number of pages:{info.pageCount}</p>
-          <p className="text-gray-400 mb-4">{info.publishedDate}</p>
+          <p>number of pages: {info.pageCount}</p>
+          <p className="text-gray-400 mb-4">release date: {info.publishedDate}</p>
           <p className="text-gray-200 leading-relaxed">{info.description}</p>
           <AddToList
             googleId={book.id}

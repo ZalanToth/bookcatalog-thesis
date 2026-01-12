@@ -4,7 +4,9 @@ import bookcatalog.thesis.backend.model.*;
 import bookcatalog.thesis.backend.repository.BookListRepository;
 import bookcatalog.thesis.backend.dto.BookDto;
 import bookcatalog.thesis.backend.repository.BookRepository;
+import bookcatalog.thesis.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,13 +15,16 @@ public class BookListService {
 
     private final BookListRepository bookListRepository;
     private final BookRepository bookRepository;
+    private final UserService userService;
 
     public BookListService(
             BookListRepository bookListRepository,
-            BookRepository bookRepository
+            BookRepository bookRepository,
+            UserService userService
     ) {
         this.bookListRepository = bookListRepository;
         this.bookRepository = bookRepository;
+        this.userService = userService;
     }
 
     public void addBookToList(
@@ -52,6 +57,22 @@ public class BookListService {
         }
 
         bookListRepository.save(list);
+    }
+
+    @Transactional
+    public void removeBookFromList(ListType type, String googleId, Authentication authentication) {
+        UserEntity user = userService.getCurrentUser(authentication);
+
+        BookListEntity list = bookListRepository
+                .findByUserAndType(user, type)
+                .orElseThrow(() -> new RuntimeException("List not found"));
+
+        BookEntity book = bookRepository
+                .findByGoogleId(googleId)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        list.getBooks().remove(book);
+        bookRepository.delete(book);
     }
 }
 

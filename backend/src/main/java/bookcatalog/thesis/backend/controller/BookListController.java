@@ -6,6 +6,7 @@ import bookcatalog.thesis.backend.model.ListType;
 import bookcatalog.thesis.backend.model.UserEntity;
 import bookcatalog.thesis.backend.service.BookListService;
 import bookcatalog.thesis.backend.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,17 @@ public class BookListController {
         System.out.println("REQUEST: " + bookDto.getTitle());
         System.out.println("AUTHORS: " + bookDto.getAuthors());
         System.out.println("PAGE COUNT: " + bookDto.getPageCount());
+    }
+
+    @DeleteMapping("/{type}/books/{googleId}")
+    public ResponseEntity<Void> deleteBookFromList(
+            @PathVariable ListType type,
+            @PathVariable String googleId,
+            Authentication authentication
+    ) {
+        UserEntity user = userService.getCurrentUser(authentication);
+        bookListService.removeBookFromList(type,googleId,authentication);
+        return ResponseEntity.noContent().build();
     }
 }
 

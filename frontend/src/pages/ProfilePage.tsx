@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchMyLists } from "../api/bookListApi";
 import type{ BookListDto } from "../types";
 import { useNavigate } from "react-router-dom";
+import { deleteBookFromList } from "../api/bookListApi";
 
 const listTitleMap: Record<string, string> = {
   TO_READ: "To Read",
@@ -14,6 +15,7 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     fetchMyLists()
       .then((data) => {
@@ -25,6 +27,15 @@ const ProfilePage = () => {
         setLoading(false);
       });
   }, []);
+  const loadLists = async () => {
+  const data = await fetchMyLists();
+  setLists(data ?? []);
+};
+
+useEffect(() => {
+  loadLists();
+}, []);
+
 
   if (loading) return <p>Loading profile…</p>;
   if (error) return <p>Error: {error}</p>;
@@ -43,21 +54,29 @@ const ProfilePage = () => {
         <div key={list.type} style={{ marginBottom: "2rem" }}>
           <h2>{listTitleMap[list.type]}</h2>
 
-          {list.books.length === 0 ? (
-            <p style={{ opacity: 0.6 }}>No books in this list.</p>
-          ) : (
-            <ul>
-              {list.books.map((book) => (
-                <li key={book.googleId}>
-                  <strong>{book.title}</strong>
-                  {book.authors?.length > 0 && (
-                    <span> — {book.authors}</span>
-                  )}
-                  <p>number of pages: {book.pageCount}</p>
-                </li>
-              ))}
-            </ul>
-          )}
+          {list.books.map((book) => (
+  <div
+    key={book.googleId}
+    className="flex justify-between items-center bg-gray-100 p-2 rounded mb-2"
+  >
+    <div>
+      <strong>{book.title}</strong>
+      <div className="text-sm text-gray-600">
+        {book.authors?.join(", ")}
+      </div>
+    </div>
+
+    <button
+      onClick={async () => {
+        await deleteBookFromList(list.type, book.googleId);
+        await loadLists();
+      }}
+      className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+    >
+      Remove
+    </button>
+  </div>
+))}
         </div>
       ))}
     </div>
