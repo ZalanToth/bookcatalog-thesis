@@ -25,4 +25,12 @@ public class BookListDto {
     public List<BookDto> getBooks() {
         return books;
     }
+
+    public void setType(ListType type) {
+        this.type = type;
+    }
+
+    public void setBooks(List<BookDto> books) {
+        this.books = books;
+    }
 }

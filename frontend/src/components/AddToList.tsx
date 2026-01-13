@@ -1,46 +1,56 @@
-import { addBookToList} from "../api/AddBookToListApi";
-import type { ListType} from "../api/AddBookToListApi";
-type Props = {
-  googleId: string;
-  title: string;
-  authors: string[];
-  pageCount: number;
-};
+// src/components/AddToList.tsx
+import { useState } from "react"
+import { addBookToList } from "../api/bookListApi"
 
-const AddToList = ({ googleId, title, authors,pageCount }: Props) => {
-  const handleAdd = async (listType: ListType) => {
+interface Props {
+  googleId: string
+  title: string
+  authors: string[]
+  pageCount: number
+}
+
+export default function AddToList({ googleId, title, authors,pageCount }: Props) {
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+
+  async function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const listType = e.target.value as "TO_READ" | "READING_NOW" | "READ"
+
+    setLoading(true)
+    setSuccess(false)
+
     try {
       await addBookToList(listType, {
         googleId,
         title,
         authors,
-        pageCount,
-      });
-      alert("Book added ✅");
-      console.log(listType,googleId,title,authors,pageCount)
-    } catch (err) {
-      console.log(listType,googleId,title,authors)
-      alert("There was an error ❌");
+        pageCount
+      })
+      setSuccess(true)
+    } catch {
+      alert("Failed to add book")
+    } finally {
+      setLoading(false)
     }
-  };
+  }
 
   return (
-    <div style={{ marginTop: "1rem" }}>
-      <p>Hozzáadás listához:</p>
+    <div className="flex items-center gap-3 mt-4">
+      <select
+        onChange={handleChange}
+        disabled={loading}
+        defaultValue=""
+        className="border px-3 py-2 rounded"
+      >
+        <option value="" disabled>
+          Add to list…
+        </option>
+        <option value="TO_READ">📚 To read</option>
+        <option value="READING_NOW">📖 Reading now</option>
+        <option value="READ">✅ Read</option>
+      </select>
 
-      <button onClick={() => handleAdd("TO_READ")}>
-        📚 To read
-      </button>
-
-      <button onClick={() => handleAdd("READING_NOW")}>
-        📖 Reading now
-      </button>
-
-      <button onClick={() => handleAdd("READ")}>
-        ✅ Read
-      </button>
+      {success && <span className="text-green-600">Saved!</span>}
     </div>
-  );
-};
-
-export default AddToList;
+  )
+}

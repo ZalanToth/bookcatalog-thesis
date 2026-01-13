@@ -1,6 +1,8 @@
 package bookcatalog.thesis.backend.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,9 +21,19 @@ public class BookEntity {
     @ElementCollection
     @CollectionTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"))
     @Column(name = "author")
-    private List<String> authors;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BookListEntity bookList;
+    private List<String> authors = new ArrayList<>();
+    private ListType listType;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
 
     public Long getId() {
@@ -51,14 +63,17 @@ public class BookEntity {
     public void setAuthors(List<String> authors) {
         this.authors = authors;
     }
-    public BookListEntity getBookList() {
-        return bookList;
-    }
-    public void setBookList(BookListEntity bookList) {}
     public int getPageCount() {
         return pageCount;
     }
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
     }
+    public ListType getListType() {
+        return listType;
+    }
+    public void setListType(ListType listType) {
+        this.listType = listType;
+    }
+
 }

@@ -60,9 +60,10 @@ useEffect(() => {
     className="flex justify-between items-center bg-gray-100 p-2 rounded mb-2"
   >
     <div>
-      <strong>{book.title}</strong>
+      <strong className="text-sm text-gray-600">{book.title}</strong>
       <div className="text-sm text-gray-600">
         {book.authors?.join(", ")}
+        <p>number of pages: {book.pageCount}</p>
       </div>
     </div>
 

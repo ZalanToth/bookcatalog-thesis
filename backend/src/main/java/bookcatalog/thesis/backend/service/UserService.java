@@ -48,7 +48,7 @@ public class UserService {
         BookListEntity readingNow = new BookListEntity(ListType.READING_NOW, user);
         BookListEntity read = new BookListEntity(ListType.READ, user);
 
-        user.getLists().addAll(List.of(toRead, readingNow, read));
+        //user.getLists().addAll(List.of(toRead, readingNow, read));
 
         return userRepository.save(user);
     }

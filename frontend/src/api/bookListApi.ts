@@ -21,3 +21,29 @@ export const deleteBookFromList = async (
     credentials: "include",
   });
 };
+
+export async function addBookToList(
+  type: "TO_READ" | "READING_NOW" | "READ",
+  book: {
+    googleId: string
+    title: string
+    authors: string[]
+    pageCount: number
+  }
+) {
+  const res = await fetch(
+    `http://localhost:8081/api/lists/${type}/books`,
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(book)
+    }
+  )
+
+  if (!res.ok) {
+    throw new Error("Failed to add book to list")
+  }
+}
