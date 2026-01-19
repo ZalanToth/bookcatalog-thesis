@@ -9,6 +9,8 @@ public class BookDto{
         String title;
         List<String> authors;
         int pageCount;
+        double averageRating;
+        int ratingsCount;
 
     public static BookDto fromEntity(BookEntity entity) {
         BookDto dto = new BookDto();
@@ -16,6 +18,8 @@ public class BookDto{
         dto.title = entity.getTitle();
         dto.authors = entity.getAuthors();
         dto.pageCount = entity.getPageCount();
+        dto.averageRating = entity.getAverageRating();
+        dto.ratingsCount = entity.getRatingsCount();
         return dto;
     }
 
@@ -32,5 +36,11 @@ public class BookDto{
     }
     public int getPageCount() {
         return pageCount;
+    }
+    public double getAverageRating() {
+        return averageRating;
+    }
+    public int getRatingsCount() {
+        return ratingsCount;
     }
 }

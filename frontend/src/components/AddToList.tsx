@@ -7,9 +7,11 @@ interface Props {
   title: string
   authors: string[]
   pageCount: number
+  averageRating: number
+  ratingsCount: number
 }
 
-export default function AddToList({ googleId, title, authors,pageCount }: Props) {
+export default function AddToList({ googleId, title, authors,pageCount,averageRating,ratingsCount }: Props) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -24,7 +26,9 @@ export default function AddToList({ googleId, title, authors,pageCount }: Props)
         googleId,
         title,
         authors,
-        pageCount
+        pageCount,
+        averageRating,
+        ratingsCount
       })
       setSuccess(true)
     } catch {

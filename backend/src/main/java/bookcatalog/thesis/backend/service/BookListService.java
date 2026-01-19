@@ -52,6 +52,8 @@ public class BookListService {
         book.setListType(targetList);
         book.setUser(user);
         book.setPageCount(dto.getPageCount());
+        book.setAverageRating(dto.getAverageRating());
+        book.setRatingsCount(dto.getRatingsCount());
 
         bookRepository.save(book);
     }

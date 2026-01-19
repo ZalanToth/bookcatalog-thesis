@@ -29,6 +29,8 @@ export async function addBookToList(
     title: string
     authors: string[]
     pageCount: number
+    averageRating: number
+    ratingsCount: number
   }
 ) {
   const res = await fetch(

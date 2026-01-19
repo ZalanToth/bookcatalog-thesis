@@ -21,6 +21,8 @@ public class BookDetailResponse {
         private String publishedDate;
         private ImageLinks imageLinks;
         private int pageCount;
+        private double averageRating;
+        private int ratingsCount;
 
         public String getTitle() { return title; }
         public void setTitle(String title) { this.title = title; }
@@ -39,6 +41,12 @@ public class BookDetailResponse {
 
         public int getPageCount() { return pageCount; }
         public void setPageCount(int pageCount) { this.pageCount = pageCount; }
+
+        public double getAverageRating() { return averageRating; }
+        public void setAverageRating(double averageRating) { this.averageRating = averageRating; }
+
+        public int getRatingsCount() { return ratingsCount; }
+        public void setRatingsCount(int ratingsCount) { this.ratingsCount = ratingsCount; }
     }
 
     public static class ImageLinks {

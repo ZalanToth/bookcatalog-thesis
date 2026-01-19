@@ -17,6 +17,8 @@ public class BookEntity {
 
     private String title;
     private int pageCount;
+    private double averageRating;
+    private int ratingsCount;
 
     @ElementCollection
     @CollectionTable(name = "book_authors", joinColumns = @JoinColumn(name = "book_id"))
@@ -76,4 +78,19 @@ public class BookEntity {
         this.listType = listType;
     }
 
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public int getRatingsCount() {
+        return ratingsCount;
+    }
+
+    public void setRatingsCount(int ratingsCount) {
+        this.ratingsCount = ratingsCount;
+    }
 }

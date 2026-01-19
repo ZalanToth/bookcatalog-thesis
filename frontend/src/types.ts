@@ -3,6 +3,8 @@ export interface BookDto {
   title: string;
   authors: string[];
   pageCount: number;
+  averageRating: number;
+  ratingsCount: number;
 }
 
 export interface BookListDto {

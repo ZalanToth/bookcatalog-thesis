@@ -19,7 +19,7 @@ export default function BookDetails() {
   if (!book) return <div className="text-white p-6">Loading...</div>;
 
   const info = book.volumeInfo;
-
+  //Ha meg kell mutatni az oldalt hogy a rating is működik akkor: s1gVAAAAYAAJ // Pride and Prejudice-t kell mutatni mert annak legalább van ratingje
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
       <div className="max-w-3xl mx-auto flex flex-col md:flex-row gap-6">
@@ -38,6 +38,8 @@ export default function BookDetails() {
             </p>
           )}
           <p>number of pages: {info.pageCount}</p>
+          <p>rating: {info.averageRating} <sub>{info.ratingsCount}</sub></p>
+          <p></p>
           <p className="text-gray-400 mb-4">release date: {info.publishedDate}</p>
           <p className="text-gray-200 leading-relaxed">{info.description}</p>
           <AddToList
@@ -45,6 +47,8 @@ export default function BookDetails() {
             title={book.volumeInfo.title}
             authors={book.volumeInfo.authors ?? []}
             pageCount ={book.volumeInfo.pageCount}
+            averageRating={book.volumeInfo.averageRating}
+            ratingsCount={book.volumeInfo.ratingsCount}
           />
         </div>
       </div>
