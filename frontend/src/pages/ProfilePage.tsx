@@ -41,7 +41,7 @@ useEffect(() => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div style={{ padding: "1rem", maxWidth: 1200, margin: "0 auto" }}>
+    <div className="min-h-screen bg-gray-900" style={{ padding: "1rem", maxWidth: 1200, margin: "0 auto" }}>
         <button
             onClick={() => navigate("/")}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded"
