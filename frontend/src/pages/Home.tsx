@@ -2,19 +2,13 @@ import { useState,useEffect } from "react";
 import BookList from "../components/BookList";
 import Navbar from "../components/Navbar";
 import { useSearchParams } from "react-router-dom";
+
+
 export default function Home() {
   const [books, setBooks] = useState<any[]>([]);
-  const [userName, setUserName] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get("q") || "";
-  useEffect(() => {
-    fetch("http://localhost:8081/user", { credentials: "include" })
-      .then(res => res.json())
-      .then(data => {
-        if (data.name) setUserName(data.name);
-      });
-  }, []);
 
   const handleSearch = async (query: string) => {
     const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
@@ -34,16 +28,15 @@ export default function Home() {
   }, [query]);
 
   return (
-    <div className="min-h-screen bg-gray-900 p-6 text-white">
-
-    {userName ? (
-        <h1 className="text-2xl font-bold mb-4">Welcome, {userName}!</h1>
-      ) : (
-        <h1 className="text-2xl font-bold mb-4">Please log in</h1>
-      )}
-
+  <div className="page-layout">
+    <div className="page-layout__navbar">
     <Navbar onSearch={handleSearch} />
-    <BookList books={books} />
+    </div>
+    <div className="page-layout__content-wrapper">
+      <div className="page-layout__content">
+      <BookList books={books} />
+    </div>
   </div>
+</div>
   );
 }

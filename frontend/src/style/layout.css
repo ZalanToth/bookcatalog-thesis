@@ -1,0 +1,50 @@
+.page-layout {
+  min-height: 100vh;
+  background-color: rgb(186, 168, 133);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+.page-layout__content-wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  width: 100%; 
+}
+.page-layout__content {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+
+.page-layout__navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgb(85, 75, 59);
+}
+.nav-name{
+    font-size: 8px;
+}
+.nav-search{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.nav-searchbar{
+    background-color: rgb(134, 120, 96);
+}
+
+.bookcard{
+    background-color: rgb(134, 120, 96);
+}
+
+@media (max-width: 1024px) {
+  .page-layout__content {
+    width: 90%;
+  }
+}

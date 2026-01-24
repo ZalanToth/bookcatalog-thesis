@@ -16,13 +16,13 @@ export default function SearchBar({ onSearch, initialValue = "" }: SearchBarProp
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex mb-6">
+    <form onSubmit={handleSubmit} className="flex">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for books..."
-        className="flex-grow p-2 rounded-l bg-gray-700 text-white"
+        className="nav-searchbar flex-grow p-2 rounded-l bg-gray-700"
       />
       <button
         type="submit"

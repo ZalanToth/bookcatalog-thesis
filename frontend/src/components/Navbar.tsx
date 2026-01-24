@@ -20,13 +20,24 @@ export default function Navbar({ onSearch }: NavbarProps) {
   }, []);
 
   return (
-    <nav className="w-full bg-gray-800 text-white px-6 py-4 flex items-center sticky top-0">
+    <nav className="w-full px-6 py-2 flex items-center sticky top-0 rounded">
       
       {/* bal oldal – üres (később logo lehet) */}
-      <div className="flex-1" />
-
+      <div className="nav-name flex-1 flex justify-left">
+        {userName ? (
+        <h1 className="text-2xl font-bold mb-4">
+          logged in as {userName}
+        </h1>
+      ) : (
+        <h1 className="text-2xl font-bold mb-4">
+          Please log in
+        </h1>
+      )}
+      </div>
+      
+        
       {/* közép – kereső */}
-      <div className="flex-1 flex justify-center">
+      <div className="nav-search flex-1 flex justify-center">
         <SearchBar onSearch={onSearch} />
       </div>
 

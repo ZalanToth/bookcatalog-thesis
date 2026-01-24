@@ -4,7 +4,7 @@ interface BookCardProps {
   title: string;
   authors?: string[];
   thumbnail?: string;
-  pageCount:  number;
+  pageCount?:  number;
 }
 
 export default function BookCard({ id, title, authors, thumbnail,pageCount }: BookCardProps) {
@@ -18,7 +18,7 @@ export default function BookCard({ id, title, authors, thumbnail,pageCount }: Bo
   return (
     <div
       onClick={handleClick}
-      className="flex bg-gray-800 text-white rounded-lg p-4 shadow-md cursor-pointer"
+      className="bookcard flex bg-gray-800 text-white rounded-lg p-4 shadow-md cursor-pointer"
     >
       {thumbnail && (
         <img
