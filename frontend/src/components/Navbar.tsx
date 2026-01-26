@@ -2,14 +2,12 @@ import SearchBar from "./SearchBar";
 import { LoginButton } from "./LoginButton";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-
-interface NavbarProps {
-  onSearch: (query: string) => void;
-}
-
-export default function Navbar({ onSearch }: NavbarProps) {
+export default function Navbar() {
   const [userName, setUserName] = useState("");
+  const [, setBooks] = useState<any[]>([]);
+  const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:8081/user", { credentials: "include" })
@@ -19,10 +17,17 @@ export default function Navbar({ onSearch }: NavbarProps) {
       });
   }, []);
 
+  const handleSearch = async (query: string) => {
+    const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
+    const data = await res.json();
+    setSearchParams({ q: query });
+    setBooks(data.items || []);
+    
+  };
+
   return (
     <nav className="w-full px-6 py-2 flex items-center sticky top-0 rounded">
       
-      {/* bal oldal – üres (később logo lehet) */}
       <div className="nav-name flex-1 flex justify-left">
         {userName ? (
         <h1 className="text-2xl font-bold mb-4">
@@ -35,13 +40,10 @@ export default function Navbar({ onSearch }: NavbarProps) {
       )}
       </div>
       
-        
-      {/* közép – kereső */}
       <div className="nav-search flex-1 flex justify-center">
-        <SearchBar onSearch={onSearch} />
+        <SearchBar onSearch={handleSearch} />
       </div>
 
-      {/* jobb oldal – login */}
       <div className="flex-1 flex justify-end">
         {userName ? (
         <button

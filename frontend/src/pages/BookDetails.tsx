@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import AddToList from "../components/AddToList";
 import { submitReview,getReviewsForBook } from "../api/reviewApi";
 import type { ReviewDto } from "../api/reviewApi";
+import Navbar from "../components/Navbar";
 
 export default function BookDetails() {
   const { id } = useParams<{ id: string }>();
@@ -60,6 +61,7 @@ export default function BookDetails() {
   // ez a postman GET kérés: https://www.googleapis.com/books/v1/volumes/s1gVAAAAYAAJ
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
+      <Navbar/>
       <div className="max-w-3xl mx-auto flex flex-col md:flex-row gap-6">
         {info.imageLinks?.thumbnail && (
           <img

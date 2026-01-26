@@ -6,18 +6,11 @@ import { useSearchParams } from "react-router-dom";
 
 export default function Home() {
   const [books, setBooks] = useState<any[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const query = searchParams.get("q") || "";
 
-  const handleSearch = async (query: string) => {
-    const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
-    const data = await res.json();
-    setSearchParams({ q: query });
-    setBooks(data.items || []);
-  };
-
-    useEffect(() => {
+  useEffect(() => {
     if (query) {
       (async () => {
         const res = await fetch(`http://localhost:8081/books/search?query=${query}`);
@@ -30,7 +23,7 @@ export default function Home() {
   return (
   <div className="page-layout">
     <div className="page-layout__navbar">
-    <Navbar onSearch={handleSearch} />
+    <Navbar/>
     </div>
     <div className="page-layout__content-wrapper">
       <div className="page-layout__content">
