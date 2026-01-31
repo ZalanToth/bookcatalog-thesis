@@ -46,9 +46,25 @@ export default function SearchBar({ onSearch, initialValue = "" }: SearchBarProp
 }, [query]);
 
 
+const wrapperRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  function handleClickOutside(e: MouseEvent) {
+    if (
+      wrapperRef.current &&
+      !wrapperRef.current.contains(e.target as Node)
+    ) {
+      setOpen(false);
+    }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
   return (
     <form onSubmit={handleSubmit} className="flex">
-      <div className="relative w-full max-w-md">
+      <div ref={wrapperRef} className="relative w-full max-w-md">
   <input
     value={query}
     onChange={(e) => setQuery(e.target.value)}
