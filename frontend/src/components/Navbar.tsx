@@ -1,7 +1,6 @@
 import SearchBar from "./SearchBar";
 import { LoginButton } from "./LoginButton";
 import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import UserMenu from "./UserMenu";
 
@@ -11,7 +10,6 @@ export default function Navbar() {
   const [userName, setUserName] = useState("");
   const [, setBooks] = useState<any[]>([]);
   const [, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:8081/user", { credentials: "include" })
       .then(res => res.json())

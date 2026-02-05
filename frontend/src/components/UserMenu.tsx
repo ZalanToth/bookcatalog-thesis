@@ -6,10 +6,14 @@ interface UserMenuProps {
 }
 
 export async function logout() {
-  await fetch("http://localhost:8081/logout", {
+  const response = await fetch("http://localhost:8081/logout", {
     method: "POST",
     credentials: "include",
   });
+
+  if (!response.ok) {
+    throw new Error("Logout failed");
+  }
 }
 
 export default function UserMenu({ name }: UserMenuProps) {
@@ -29,8 +33,13 @@ export default function UserMenu({ name }: UserMenuProps) {
   }, []);
 
   async function handleLogout() {
+    try {
     await logout();
+  } catch (error) {
+    console.error("Logout error:", error);
+  } finally {
     window.location.href = "/";
+  }
   }
 
   return (
