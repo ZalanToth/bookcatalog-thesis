@@ -60,8 +60,11 @@ export default function BookDetails() {
   //Ha meg kell mutatni az oldalt hogy a rating is működik akkor: s1gVAAAAYAAJ // Pride and Prejudice-t kell mutatni mert annak legalább van ratingje
   // ez a postman GET kérés: https://www.googleapis.com/books/v1/volumes/s1gVAAAAYAAJ
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
-      <Navbar/>
+    <div className="bookdetail-layout">
+      <div className="page-layout_navbar">
+        <Navbar/>
+      </div>
+      
       <div className="max-w-3xl mx-auto flex flex-col md:flex-row gap-6">
         {info.imageLinks?.thumbnail && (
           <img
@@ -99,7 +102,7 @@ export default function BookDetails() {
             >
               <option value={0}>Select rating</option>
               {[1, 2, 3, 4, 5].map((n) => (
-                <option key={n} value={n}>
+                <option key={n} value={n} className=" text-black">
                   {n}
                 </option>
               ))}
@@ -116,7 +119,7 @@ export default function BookDetails() {
             <button
               onClick={handleSubmitReview}
               disabled={rating === 0}
-              className="bg-blue-600 text-white px-4 py-2 rounded"
+              className="nav-button bg-blue-600 text-white px-4 py-2 rounded"
             >
               Submit review
             </button>
@@ -125,7 +128,7 @@ export default function BookDetails() {
             {reviews.map((r) => (
               <div key={r.id} className="border p-3 mb-2">
                 <div className="font-semibold">
-                  {r.userName} – ⭐ {r.rating}
+                  {r.userName} - ⭐ {r.rating}
                 </div>
                 <p>{r.reviewText}</p>
               </div>

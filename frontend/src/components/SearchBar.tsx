@@ -69,12 +69,12 @@ useEffect(() => {
     value={query}
     onChange={(e) => setQuery(e.target.value)}
     placeholder="Search books..."
-    className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none"
+    className="nav-searchbar w-full px-4 py-2 rounded  text-white "
     onFocus={() => results.length && setOpen(true)}
   />
 
   {open && (
-    <div className="absolute z-50 w-full bg-gray-800 mt-1 rounded shadow-lg max-h-96 overflow-y-auto">
+    <div className="absolute z-50 w-full bg-gray-800 mt-1 rounded-l shadow-lg max-h-96 overflow-y-auto">
       {loading && (
         <div className="p-3 text-gray-400">Searching…</div>
       )}
@@ -100,7 +100,7 @@ useEffect(() => {
 
       <button
         type="submit"
-        className="px-4 bg-blue-600 rounded-r hover:bg-blue-700"
+        className="nav-button rounded-r"
       >
         Search
       </button>

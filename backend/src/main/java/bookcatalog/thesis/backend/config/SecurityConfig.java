@@ -26,6 +26,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/lists/**").authenticated()
                         .anyRequest().permitAll()
                 )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("http://localhost:5173")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/oauth2/authorization/google")
                         .successHandler(customSuccessHandler())

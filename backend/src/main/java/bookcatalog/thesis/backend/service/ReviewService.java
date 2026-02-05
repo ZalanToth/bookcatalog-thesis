@@ -2,6 +2,8 @@ package bookcatalog.thesis.backend.service;
 
 import bookcatalog.thesis.backend.dto.CreateReviewRequest;
 import bookcatalog.thesis.backend.dto.ReviewDto;
+import bookcatalog.thesis.backend.model.BookEntity;
+import bookcatalog.thesis.backend.model.ListType;
 import bookcatalog.thesis.backend.model.ReviewEntity;
 import bookcatalog.thesis.backend.model.UserEntity;
 import bookcatalog.thesis.backend.repository.ReviewRepository;
@@ -50,6 +52,21 @@ public class ReviewService {
                 .map(this::toDto)
                 .toList();
     }
+    /*@Transactional
+    public void deleteReview(
+            String googleId,
+            Authentication auth
+    ) {
+        UserEntity user = userService.getCurrentUser(auth);
+
+        ReviewEntity review = reviewRepository
+                .findByUserAndGoogleId(user, googleId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+
+        reviewRepository.delete(review);
+    }*/
+
 
     private ReviewDto toDto(ReviewEntity entity) {
         ReviewDto dto = new ReviewDto();

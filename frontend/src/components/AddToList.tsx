@@ -39,7 +39,7 @@ export default function AddToList({ googleId, title, authors,pageCount,averageRa
   }
 
   return (
-    <div className="flex items-center gap-3 mt-4">
+    <div className="flex items-center gap-3 mt-4 ">
       <select
         onChange={handleChange}
         disabled={loading}
@@ -49,9 +49,9 @@ export default function AddToList({ googleId, title, authors,pageCount,averageRa
         <option value="" disabled>
           Add to list…
         </option>
-        <option value="TO_READ">📚 To read</option>
-        <option value="READING_NOW">📖 Reading now</option>
-        <option value="READ">✅ Read</option>
+        <option value="TO_READ" className=" text-black">📚 To read</option>
+        <option value="READING_NOW" className=" text-black">📖 Reading now</option>
+        <option value="READ" className=" text-black">✅ Read</option>
       </select>
 
       {success && <span className="text-green-600">Saved!</span>}

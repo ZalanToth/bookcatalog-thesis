@@ -22,11 +22,11 @@ export default function Home() {
 
   return (
   <div className="page-layout">
-    <div className="page-layout__navbar">
+    <div className="page-layout_navbar">
     <Navbar/>
     </div>
-    <div className="page-layout__content-wrapper">
-      <div className="page-layout__content">
+    <div className="page-layout_content-wrapper">
+      <div className="page-layout_content">
       <BookList books={books} />
     </div>
   </div>

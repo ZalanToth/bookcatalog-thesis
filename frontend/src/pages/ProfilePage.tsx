@@ -3,6 +3,7 @@ import { fetchMyLists } from "../api/bookListApi";
 import type{ BookListDto } from "../types";
 import { useNavigate } from "react-router-dom";
 import { deleteBookFromList } from "../api/bookListApi";
+import Navbar from "../components/Navbar";
 
 const listTitleMap: Record<string, string> = {
   TO_READ: "To Read",
@@ -14,6 +15,7 @@ const ProfilePage = () => {
   const [lists, setLists] = useState<BookListDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeListType, setActiveListType] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,46 +43,65 @@ useEffect(() => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="min-h-screen bg-gray-900" style={{ padding: "1rem", maxWidth: 1200, margin: "0 auto" }}>
-        <button
-            onClick={() => navigate("/")}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded"
-          >
-            Home
-          </button>
-      <h1>My Book Lists</h1>
-
-      {lists.map((list) => (
-        <div key={list.type} style={{ marginBottom: "2rem" }}>
-          <h2>{listTitleMap[list.type]}</h2>
-
-          {list.books.map((book) => (
-  <div
-    key={book.googleId}
-    className="flex justify-between items-center bg-gray-100 p-2 rounded mb-2"
-  >
-    <div>
-      <strong className="text-sm text-gray-600">{book.title}</strong>
-      <div className="text-sm text-gray-600">
-        {book.authors?.join(", ")}
-        <p>number of pages: {book.pageCount}</p>
+    <div className="profile-layout">
+      <div className="page-layout_navbar">
+      <Navbar/>
       </div>
-    </div>
+      <button
+          onClick={() => navigate("/")}
+          className="nav-button"
+      >
+          Home
+      </button>
+      <h1>My Book Lists</h1>
+        <div className="flex my-4">
+          {lists.map((list) => (
+            <button
+              key={list.type}
+              onClick={() => setActiveListType(list.type)}
+              className={`px-4 py-2 list-button  ${
+                activeListType === list.type
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-300 white hover:bg-gray-400"
+              }`}
+            >
+              {listTitleMap[list.type]}
+            </button>
+          ))}
+        </div>
+      {lists
+  .filter((list) => list.type === activeListType)
+  .map((list) => (
+    <div key={list.type} style={{ marginBottom: "2rem" }}>
+      <h2>{listTitleMap[list.type]}</h2>
 
-    <button
-      onClick={async () => {
-        await deleteBookFromList(list.type, book.googleId);
-        await loadLists();
-      }}
-      className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-    >
-      Remove
-    </button>
-  </div>
-))}
+      {list.books.map((book) => (
+        <div
+          key={book.googleId}
+          className="list-item flex p-2 rounded mb-2"
+        >
+          <div>
+            <strong className="text-m">{book.title}</strong>
+            <div className="text-sm">
+              {book.authors?.join(", ")}
+              <p>number of pages: {book.pageCount}</p>
+            </div>
+          </div>
+
+          <button
+            onClick={async () => {
+              await deleteBookFromList(list.type, book.googleId);
+              await loadLists();
+            }}
+            className="list-delete-button"
+          >
+            Remove
+          </button>
         </div>
       ))}
     </div>
+  ))}
+  </div>
   );
 };
 
