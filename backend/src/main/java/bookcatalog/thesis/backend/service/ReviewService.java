@@ -52,7 +52,13 @@ public class ReviewService {
                 .map(this::toDto)
                 .toList();
     }
-    /*@Transactional
+
+    public ReviewDto getMyReview(String googleId, Authentication auth) {
+        UserEntity user = userService.getCurrentUser(auth);
+        return reviewRepository.findByUserAndGoogleId(user, googleId).map(this::toDto).orElse(null);
+    }
+
+    @Transactional
     public void deleteReview(
             String googleId,
             Authentication auth
@@ -65,7 +71,7 @@ public class ReviewService {
 
 
         reviewRepository.delete(review);
-    }*/
+    }
 
 
     private ReviewDto toDto(ReviewEntity entity) {

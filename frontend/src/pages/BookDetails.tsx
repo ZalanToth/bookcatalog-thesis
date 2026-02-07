@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddToList from "../components/AddToList";
-import { submitReview,getReviewsForBook } from "../api/reviewApi";
+import { submitReview,getReviewsForBook, deleteReview } from "../api/reviewApi";
 import type { ReviewDto } from "../api/reviewApi";
 import Navbar from "../components/Navbar";
 
@@ -12,6 +12,23 @@ export default function BookDetails() {
   const [reviewText, setReviewText] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [reviews, setReviews] = useState<ReviewDto[]>([]);
+  const [myReview, setMyReview] = useState<ReviewDto | null>(null);
+
+  useEffect(() => {
+  if (!id) return;
+
+  fetch(`http://localhost:8081/api/reviews/me/${id}`, {
+    credentials: "include",
+  })
+    .then(res => res.ok ? res.json() : null)
+    .then(data => {
+      if (data) {
+        setMyReview(data);
+        setRating(data.rating);
+        setReviewText(data.reviewText);
+      }
+    });
+}, [id]);
 
   async function handleSubmitReview() {
     if (!id) {
@@ -33,6 +50,16 @@ export default function BookDetails() {
     setError("Failed to save review");
   }
 }
+  async function handleDeleteReview(googleId: string) {
+  if (!confirm("Are you sure you want to delete this review?")) return;
+
+  try {
+    await deleteReview(googleId);
+  } catch (err) {
+    alert("Failed to delete review");
+  }
+}
+
 
   useEffect(() => {
     if (!id) {
@@ -42,8 +69,8 @@ export default function BookDetails() {
   getReviewsForBook(id).then(setReviews);
   }, [id]);
 
-  useEffect(() => {
-    fetch(`http://localhost:8081/${id}`)
+  useEffect(() => {  
+    fetch(`http://localhost:8081/books/${id}`)
       .then(res => res.json())
       .then(data => {
         console.log("Book details fetched:", data);
@@ -96,7 +123,7 @@ export default function BookDetails() {
       <div className="mt-6 border-t pt-4">
         <h2 className="text-xl font-semibold mb-2">Write a review</h2>
             <select
-              value={rating}
+              defaultValue={myReview?.rating}
               onChange={(e) => setRating(Number(e.target.value))}
               className="border p-2 mb-2 block"
             >
@@ -108,7 +135,7 @@ export default function BookDetails() {
               ))}
             </select>
             <textarea
-              value={reviewText}
+              defaultValue={myReview?.reviewText}
               onChange={(e) => setReviewText(e.target.value)}
               placeholder="Write your thoughts..."
               className="border p-2 w-full mb-2"
@@ -131,6 +158,12 @@ export default function BookDetails() {
                   {r.userName} - ⭐ {r.rating}
                 </div>
                 <p>{r.reviewText}</p>
+                <button
+                  onClick={() => handleDeleteReview(r.googleId)}
+                  className="text-red-500 text-sm hover:underline"
+                >
+                  Delete
+              </button>
               </div>
             ))}
         </div>

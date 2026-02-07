@@ -47,3 +47,11 @@ export async function getReviewsForBook(
 
   return response.json();
 }
+export const deleteReview = async (
+  googleId: string
+) => {
+  await fetch(`http://localhost:8081/api/reviews/delete/${googleId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+};

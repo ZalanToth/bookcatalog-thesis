@@ -20,7 +20,7 @@ public class BookController {
         return bookService.searchBooks(query);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/books/{id}")
     public BookDetailResponse getBookById(@PathVariable String id) {
         return bookService.getBookById(id);
     }

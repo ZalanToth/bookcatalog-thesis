@@ -31,4 +31,20 @@ public class ReviewController {
     ) {
         return reviewService.getReviewsForBook(googleId);
     }
+
+    @DeleteMapping("/delete/{googleId}")
+    public void deleteReview(
+            @PathVariable String googleId,
+            Authentication authentication
+    ){
+        reviewService.deleteReview(googleId,authentication);
+    }
+
+    @GetMapping("/me/{googleId}")
+    public ReviewDto getMyReview(
+            @PathVariable String googleId,
+            Authentication auth
+    ){
+        return reviewService.getMyReview(googleId,auth);
+    }
 }

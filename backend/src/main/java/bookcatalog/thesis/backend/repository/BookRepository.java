@@ -1,6 +1,7 @@
 package bookcatalog.thesis.backend.repository;
 
 import bookcatalog.thesis.backend.model.BookEntity;
+import bookcatalog.thesis.backend.model.BookListEntity;
 import bookcatalog.thesis.backend.model.ListType;
 import bookcatalog.thesis.backend.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

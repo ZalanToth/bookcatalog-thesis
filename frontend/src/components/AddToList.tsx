@@ -1,6 +1,7 @@
 // src/components/AddToList.tsx
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { addBookToList } from "../api/bookListApi"
+
 
 interface Props {
   googleId: string
@@ -14,6 +15,18 @@ interface Props {
 export default function AddToList({ googleId, title, authors,pageCount,averageRating,ratingsCount }: Props) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [currentList, setCurrentList] = useState<string | null>(null);
+
+  useEffect(() => {
+  if (!googleId) return;
+
+  fetch(`http://localhost:8081/api/lists/${googleId}/list-status`, {
+    credentials: "include",
+  })
+    .then(res => res.json())
+    .then(data => setCurrentList(data.listType))
+    .catch(() => setCurrentList(null));
+}, [googleId]);
 
   async function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const listType = e.target.value as "TO_READ" | "READING_NOW" | "READ"
@@ -43,7 +56,7 @@ export default function AddToList({ googleId, title, authors,pageCount,averageRa
       <select
         onChange={handleChange}
         disabled={loading}
-        defaultValue=""
+        value={currentList ?? ""}
         className="border px-3 py-2 rounded"
       >
         <option value="" disabled>

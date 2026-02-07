@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchMyLists } from "../api/bookListApi";
 import type{ BookListDto } from "../types";
-import { useNavigate } from "react-router-dom";
 import { deleteBookFromList } from "../api/bookListApi";
 import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 const listTitleMap: Record<string, string> = {
   TO_READ: "To Read",
@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeListType, setActiveListType] = useState<string | null>(null);
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchMyLists()
@@ -37,6 +37,11 @@ const ProfilePage = () => {
 useEffect(() => {
   loadLists();
 }, []);
+useEffect(() => {
+  if (lists.length > 0 && activeListType === null) {
+    setActiveListType(lists[0].type);
+  }
+}, [lists, activeListType]);
 
 
   if (loading) return <p>Loading profile…</p>;
@@ -47,12 +52,7 @@ useEffect(() => {
       <div className="page-layout_navbar">
       <Navbar/>
       </div>
-      <button
-          onClick={() => navigate("/")}
-          className="nav-button"
-      >
-          Home
-      </button>
+      
       <h1>My Book Lists</h1>
         <div className="flex my-4">
           {lists.map((list) => (
@@ -81,7 +81,12 @@ useEffect(() => {
           className="list-item flex p-2 rounded mb-2"
         >
           <div>
+            <Link
+              to={`/${book.googleId}`}
+              
+            >
             <strong className="text-m">{book.title}</strong>
+            </Link>
             <div className="text-sm">
               {book.authors?.join(", ")}
               <p>number of pages: {book.pageCount}</p>

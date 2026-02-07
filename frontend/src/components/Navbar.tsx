@@ -3,6 +3,8 @@ import { LoginButton } from "./LoginButton";
 import { useState,useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import UserMenu from "./UserMenu";
+import logokettospnotde from "../style/logokettospnotde.png"
+import { Link } from "react-router-dom";
 
 
 
@@ -10,6 +12,8 @@ export default function Navbar() {
   const [userName, setUserName] = useState("");
   const [, setBooks] = useState<any[]>([]);
   const [, setSearchParams] = useSearchParams();
+
+
   useEffect(() => {
     fetch("http://localhost:8081/user", { credentials: "include" })
       .then(res => res.json())
@@ -29,7 +33,14 @@ export default function Navbar() {
   return (
     <nav className="w-full px-6 py-2 flex items-center sticky top-0 rounded">
       
-      <div className="nav-name flex-1 flex justify-left">
+      <div className="flex-1 flex justify-left">
+        <Link to="/" className="flex items-center gap-3">
+        <img
+          src={logokettospnotde}
+          alt="Book Catalog Logo"
+          className="h-10 w-auto"
+        />
+        </Link>
       </div>
       
       <div className="nav-search flex-1 flex justify-center">
