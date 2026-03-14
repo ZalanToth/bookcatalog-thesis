@@ -46,6 +46,7 @@ export default function BookDetails() {
     setRating(0);
     setError(null);
     alert("Review saved!");
+    getReviewsForBook(id).then(setReviews)
   } catch (err) {
     setError("Failed to save review");
   }
@@ -108,7 +109,7 @@ export default function BookDetails() {
             </p>
           )}
           <p>number of pages: {info.pageCount}</p>
-          <p>average rating: {info.averageRating} <sub>from: {info.ratingsCount}</sub></p>
+          <p>average rating: {info.averageRating} from: {info.ratingsCount}</p>
           <p></p>
           <p className="text-gray-400 mb-4">release date: {info.publishedDate}</p>
           <p className="text-gray-200 leading-relaxed">{info.description}</p>
@@ -150,6 +151,12 @@ export default function BookDetails() {
             >
               Submit review
             </button>
+            <button
+                  onClick={() => handleDeleteReview(book.id)}
+                  className="delete-button hover:underline"
+                >
+                  Delete
+              </button>
           </div>
           <h2 className="text-xl font-semibold mt-6">Reviews</h2>
             {reviews.map((r) => (
@@ -158,12 +165,7 @@ export default function BookDetails() {
                   {r.userName} - ⭐ {r.rating}
                 </div>
                 <p>{r.reviewText}</p>
-                <button
-                  onClick={() => handleDeleteReview(r.googleId)}
-                  className="text-red-500 text-sm hover:underline"
-                >
-                  Delete
-              </button>
+                
               </div>
             ))}
         </div>

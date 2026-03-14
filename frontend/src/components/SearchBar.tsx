@@ -69,7 +69,7 @@ useEffect(() => {
     value={query}
     onChange={(e) => setQuery(e.target.value)}
     placeholder="Search books..."
-    className="nav-searchbar w-full px-4 py-2 rounded  text-white "
+    className="nav-searchbar w-full px-4 py-2 rounded-l  text-white "
     onFocus={() => results.length && setOpen(true)}
   />
 
@@ -100,7 +100,7 @@ useEffect(() => {
 
       <button
         type="submit"
-        className="nav-button rounded-r"
+        className="nav-search-button rounded-r"
       >
         Search
       </button>

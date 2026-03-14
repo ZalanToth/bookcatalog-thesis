@@ -1,6 +1,5 @@
 package bookcatalog.thesis.backend.service;
 
-import bookcatalog.thesis.backend.dto.BookListStatusDto;
 import bookcatalog.thesis.backend.model.*;
 import bookcatalog.thesis.backend.dto.BookDto;
 import bookcatalog.thesis.backend.repository.BookRepository;
@@ -77,14 +76,6 @@ public class BookListService {
         bookRepository.delete(book);
     }
 
-    public BookListStatusDto getListStatus(String googleId, Authentication auth ) {
-        UserEntity user = userService.getCurrentUser(auth);
-
-        return bookRepository
-                .findByUserAndGoogleId(user, googleId)
-                .map(list -> new BookListStatusDto(list.getListType()))
-                .orElse(new BookListStatusDto(null));
-    }
 }
 
 

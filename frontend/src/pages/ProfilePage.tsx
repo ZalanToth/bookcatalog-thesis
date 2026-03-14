@@ -83,7 +83,7 @@ useEffect(() => {
           <div>
             <Link
               to={`/${book.googleId}`}
-              
+              className="hover:underline hover:text-blue-600"
             >
             <strong className="text-m">{book.title}</strong>
             </Link>
@@ -98,7 +98,7 @@ useEffect(() => {
               await deleteBookFromList(list.type, book.googleId);
               await loadLists();
             }}
-            className="list-delete-button"
+            className="delete-button"
           >
             Remove
           </button>
