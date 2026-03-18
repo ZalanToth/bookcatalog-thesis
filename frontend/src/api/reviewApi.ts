@@ -47,11 +47,16 @@ export async function getReviewsForBook(
 
   return response.json();
 }
-export const deleteReview = async (
-  googleId: string
-) => {
-  await fetch(`http://localhost:8081/api/reviews/delete/${googleId}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
-};
+export async function deleteReview(googleId: string): Promise<void> {
+  const res = await fetch(
+    `http://localhost:8081/api/reviews/${googleId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to delete review");
+  }
+}
