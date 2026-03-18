@@ -47,7 +47,17 @@ export async function getReviewsForBook(
 
   return response.json();
 }
-export async function deleteReview(googleId: string): Promise<void> {
+
+export const deleteReview = async (
+  googleId: string
+) => {
+  await fetch(`http://localhost:8081/api/reviews/delete/${googleId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+};
+
+/*export async function deleteReview(googleId: string): Promise<void> {
   const res = await fetch(
     `http://localhost:8081/api/reviews/${googleId}`,
     {
@@ -59,4 +69,4 @@ export async function deleteReview(googleId: string): Promise<void> {
   if (!res.ok) {
     throw new Error("Failed to delete review");
   }
-}
+}*/
