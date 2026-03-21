@@ -17,9 +17,6 @@ public class UserEntity {
     private String email;
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookEntity> books = new ArrayList<>();
-
     public UserEntity() {
     }
 
@@ -41,13 +38,5 @@ public class UserEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<BookEntity> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookEntity> books) {
-        this.books = books;
     }
 }

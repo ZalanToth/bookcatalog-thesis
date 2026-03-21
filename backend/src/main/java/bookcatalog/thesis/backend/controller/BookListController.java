@@ -2,6 +2,7 @@ package bookcatalog.thesis.backend.controller;
 
 import bookcatalog.thesis.backend.dto.BookDto;
 import bookcatalog.thesis.backend.dto.BookListDto;
+import bookcatalog.thesis.backend.dto.BookListStatusDto;
 import bookcatalog.thesis.backend.model.ListType;
 import bookcatalog.thesis.backend.model.UserEntity;
 import bookcatalog.thesis.backend.service.BookListService;
@@ -60,5 +61,9 @@ public class BookListController {
         bookListService.deleteBookFromList(type, googleId, authentication);
     }
 
+    @GetMapping("/{googleId}/list-status")
+    public BookListStatusDto getListStatus(@PathVariable String googleId, Authentication auth) {
+        return bookListService.getListStatus(googleId,auth);
+    }
 }
 
